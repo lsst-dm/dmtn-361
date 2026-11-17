@@ -1429,7 +1429,6 @@ observatories
         Pan-STARRS
         Parkes
         RATAN-600
-        Rubin
         SKA
         SKAMP
         SMA
@@ -1738,8 +1737,6 @@ protocols
     Datalink
     EPN-TAP
     FTP
-    GCP
-    GKE
     HTTP
     IVOA Data Access Layer (DAL)
     JPIP

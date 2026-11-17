@@ -147,6 +147,9 @@ import time
 import AdassChecks
 import TexScanner
 
+import functools
+open = functools.partial(open, encoding="latin-1")  # 2026: raw bytes, as in Python 2
+
 # ------------------------------------------------------------------------------
 
 #                         F i n d  T e x  F i l e
@@ -480,9 +483,9 @@ def CheckPaperName(Paper,Problems) :
       NumChars = len(Number)
 
       if (VictoriaPosters):
-         if (NumChars != 2):
+         if (NumChars != 3):
             Problem = \
-               "Poster numbers must be two digits, with leading zeros if needed"
+               "Paper numbers must be three digits (track + number), e.g. C101"
             print("**", Problem, "**")
             Problems.append(Problem)
             ValidSoFar = False
@@ -723,7 +726,7 @@ def CheckSubjectIndexEntries(Paper, Problems, TexFileName = "") :
     # Read the total list of keywords from subjectKeywords.txt and newKeywords.txt
     # Is there a better way to use AdassConfig.* methods to point at relative file paths?
     Entries = compose(set, Reduce(__add__), Map(AdassIndex.ReadIndexList))(
-                      ['../Author_Template/subjectKeywords.txt', '../Author_Template/newKeywords.txt'] )
+                      [os.path.join(d, f) for d in (os.path.dirname(os.path.abspath(__file__)), '../Author_Template') for f in ('subjectKeywords.txt', 'newKeywords.txt')] )
     if not Entries:
         Problems.append( "No subject keywords found **at all**?! (../Author_Template/{subject|new}Keywords.txt missing?" )
         return False
@@ -956,7 +959,7 @@ else :
       Step = Step + 1
       print("")
       print("Step", Step, " - Check copyright form --------------------")
-      if (not FindCopyrightForm(Paper, Author, Problems)):
+      if (not FindCopyrightForm(Paper, PaperAuthor, Problems)):
          Problem = "CopyRight form not found"
       else:
          print("CopyRight form found")
