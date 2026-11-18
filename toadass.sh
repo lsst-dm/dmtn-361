@@ -12,7 +12,8 @@ export TEXMFHOME=${TEXMFHOME:-lsst-texmf/texmf}
 cd "$(dirname "$0")"
 
 # make sure meta/authors and the .aux are current
-make $SRC.pdf
+make authors.tex
+#make $SRC.pdf
 
 # figures: figures/<name>.eps -> ${P}_fN.eps, in order of appearance
 SEDARGS=()
