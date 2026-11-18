@@ -92,7 +92,7 @@ The Data Butler \citep{2022SPIE12189E..11J} provides the access layer,  pipeline
 It does not need to know whether the backing store is POSIX, S3, Google Cloud Storage or something else, nor whether the registry is SQLite, PostgreSQL or a managed database service.
 
 The same pipeline code therefore runs unchanged on laptops, the summit, cloud systems and the Data Facilities.
-The Butler registry also tracks dataset identity and provenance, and Felis \citep{DMTN-273} and related tooling keep the logical schema explicit.
+The Butler registry also tracks dataset identity and provenance, and Felis \citep{2024arXiv241209721M} and related tooling keep the logical schema explicit.
 The Butler is now also used by SPHEREx \citep{2026ApJS..285...67A}.
 
 Gaia took a similar approach, insulating its algorithms from the Main Database through a common versioned data model and a controlled interface \citep{2011ExA....31..215O}.
@@ -134,7 +134,7 @@ We do plenty of prototyping; like any project some prototypes hang around too lo
 With current hardware price trends, and given the maturity of the Rubin code base, now is the time to optimize, including GPU or other hardware speedups which will require code changes.
 
 Rubin has used dedicated scale tests, precursor data, cloud experiments and repeated production exercises to flush out issues.
-The Data Previews are the latest of these; DP1 \citep{2026AJ....171..360Vshort} was effectively an operations rehearsal for DM on making a Data Release.
+The Data Previews are the latest of these; DP1 \citep{2026AJ....171..360V} was effectively an operations rehearsal for DM on making a Data Release.
 
 Qserv \citep{2025ASPC..538..114M}, our shared-nothing parallel catalog database, provides spatial partitioning, overlap for near-neighbor queries, shared scans and replication.
 It has been tested with mixed workloads, not just single benchmark queries.
@@ -216,7 +216,7 @@ Long lived organizations, in theory, retain capability across staff turnover and
 They feel more reliable for the agencies, its a known entity.
 The cost is organizational inertia.
 Organizations spend substantial effort maintaining their structures, and the mechanisms that provide reliability also resist change
-\citep{e6805d07-4fd7-31d0-9779-42b323de329b,10.2307/2094928,10.4102/sajip.v24i2.652,organizationalinertia2023reviewshort}.
+\citep{e6805d07-4fd7-31d0-9779-42b323de329b,10.2307/2094928,10.4102/sajip.v24i2.652,organizationalinertia2023review}.
 This implies making procedures for  everything to remove individual variations and reduce risk,
 however it also stifles innovation and certainly adds delay.
 In some areas this makes sense - broadly applied in a scientific endeavor not necessarily.
@@ -315,9 +315,9 @@ One can often claim many lower requirements with a big test or delivery such as 
 
 \subsection{Automate early}
 
-Continuous integration, automated deployment and configuration management are much cheaper to introduce before a system is operational.
+{\sloppy Continuous integration, automated deployment and configuration management are much cheaper to introduce before a system is operational.
 Automation lowers the cost of change, so fixes and updates actually get applied which is becoming more important in the new AI driven security race.
-These days it is really patch or get hacked.
+These days it is really patch or get hacked.\par}
 
 \subsection{Keep technical authority close to the work}
 

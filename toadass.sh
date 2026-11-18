@@ -1,6 +1,6 @@
 #!/bin/bash
 # Flatten DMTN-361 into the single-file layout the ADASS proceedings want:
-#   I701.tex (inputs inlined), I701.bib (cited entries only), I701_fN.eps
+#   I701.tex (inputs inlined), I701.bib (local.bib + allcitations.bib), I701_fN.eps
 # Usage: ./toadass.sh [target_dir]
 set -euo pipefail
 
@@ -11,7 +11,7 @@ export TEXMFHOME=${TEXMFHOME:-lsst-texmf/texmf}
 
 cd "$(dirname "$0")"
 
-# make sure meta/authors and the .aux (needed for bibexport) are current
+# make sure meta/authors and the .aux are current
 make $SRC.pdf
 
 # figures: figures/<name>.eps -> ${P}_fN.eps, in order of appearance
@@ -28,9 +28,7 @@ perl -pe 'if (/^\\input\{(\w+)\}\s*$/) { open(my $f, "<", "$1.tex") or die "$1.t
     sed -e "s/^\\\\bibliography{.*}/\\\\bibliography{$P}/" \
         "${SEDARGS[@]}" > "$DEST/$P.tex"
 
-# only the entries actually cited, pulled from local.bib and the shared lsst-texmf bibs
-BIB=$TEXMFHOME/bibtex/bib
-python3 -W ignore "$TEXMFHOME/../bin/extract_citations.py" -o "$DEST/$P.bib" \
-    -b local.bib "$BIB"/{lsst,lsst-dm,refs_ads,refs,books}.bib -- "$DEST/$P.tex"
+# all citations are already in local.bib and allcitations.bib
+cat local.bib allcitations.bib > "$DEST/$P.bib"
 
 echo "Wrote $DEST/$P.tex, $DEST/$P.bib and $n figure(s)"
