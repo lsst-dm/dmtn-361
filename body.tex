@@ -26,14 +26,13 @@ That includes the 103,000Km of fibre providing a reliable connection betwee the 
 \subsection{From the camera to Prompt Processing}
 \label{sec:prompt}
 
-Camera readout takes three seconds and produces one FITS image per CCD.
-A Header Service subscribes to the engineering event streams and gathers information the camera does not have, such as pointing metadata, to publish a header.
-Additional metadata are carried in a JSON sidecar.
+A Header Service subscribes to the engineering event streams and gathers information the camera does not have, such as pointing metadata, to publish a header, which the camera receives.
+Camera readout takes three seconds and produces one FITS image per CCD using the header information.
+Additional metadata are carried in a JSON sidecar, and both are written to S3 storage.  The S3 storage sends a Kafka message once each file is written, which notifies a service to gather messages to quickly ingest files into the Butler.
 Preview and rapid-analysis services on the summit render the data within a few seconds allowing operators a very compressed quick look at the massive image.
 
 Image and metadata are sent to SLAC over encrypted links using persistent HTTPS connections and S3-style writes, avoiding repeated connection-setup costs.
 It took many years to acquire the fibre network between the observatory and SLAC, and a few years to get the performance to where it needs to be.
-
 
 The images contain $\approx$ 8GB of information which compresses to  around $\approx 4GB$ on the wire/disk.
 In normal operation more than 95\% of CCD images arrive at the USDF in two to three seconds, without landing on an intermediate disk.
