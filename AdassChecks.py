@@ -269,6 +269,9 @@ import subprocess
 
 import TexScanner
 
+import functools
+open = functools.partial(open, encoding="latin-1")  # 2026: raw bytes, as in Python 2
+
 # ------------------------------------------------------------------------------
 
 #                 A d a s s  C o n f e r e n c e  D e t a i l s
@@ -644,8 +647,8 @@ def VerifyRefs (Paper,AllowBibitems = True,TexFileName = "",BibFileName = "", \
          TexFile = open(TexFileName,mode='r')
          for TexFileLine in TexFile :
             if (not TexFileLine.startswith("%")) :
-               if (TexFileLine.find("\\usepackage{./asp2014}") >= 0) :
-                  print("** .tex file has \\usepackage{./asp2014} directive **")
+               if (TexFileLine.find("\\usepackage{./asp2023}") >= 0) :
+                  print("** .tex file has \\usepackage{./asp2023} directive **")
                   Warn = True
                Index = TexFileLine.find("\\bibliography{")
                if (Index >= 0) :
@@ -3063,7 +3066,7 @@ def PackageScanCallback(Words,StandardList,NonStandard) :
                Len = len(Packages)
                if (Len > 0) :
                   for Package in Packages :
-                     if (Package != "asp2014" and Package != "./asp2014") :
+                     if (Package != "asp2023" and Package != "./asp2023") :
                         Standard = False
                         for StandardPkg in __StandardPackages__ :
                            if (Package == StandardPkg) :
@@ -3181,7 +3184,7 @@ def RunningHeadsCallback(Words,Notes,Unused) :
             Problem = "Paper contains multiple \\markboth directives"
          if (NumberWords != 3) :
             Problem = "\\markboth directive has wrong number of arguments"
-            Problems.append(Problem)
+            Notes.append(Problem)
          else :
             Authors = Words[1].strip('{}')
             Title = Words[2].strip('{}')
