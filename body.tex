@@ -21,7 +21,7 @@ This paper describes how we built and operate a petascale astronomical data syst
 Rubin uses an 8.4~m mirror to give a 9.6~deg$^2$ field of view  and uses the largest digital camera built to date to capture the details of the sky.
 Most users will never interact with either the telescope or the camera; they will use calibrated images, catalogs, alerts, APIs, notebooks and query services.
 DM is responsible for data from the back of the camera all the way to delivering science-ready products to the data rights holders.
-That includes the 103,000\,km of fibre providing a reliable connection between the camera and SLAC!
+That includes the 103,000\,km of fiber providing a reliable connection between the camera and SLAC!
 
 \subsection{From the camera to Prompt Processing}
 \label{sec:prompt}
@@ -32,9 +32,9 @@ Metadata are also carried in a JSON sidecar to facilitate Butler \citep{2022SPIE
 Preview and rapid-analysis services on the summit render the data within a few seconds allowing operators a very compressed quick look at the massive image to inform ongoing nightly operations.
 
 Image and metadata are sent to SLAC over encrypted links using persistent HTTPS connections and S3-style writes, avoiding repeated connection-setup costs.
-It took many years to acquire the fibre network between the observatory and SLAC, and a few years to get the performance to where it needs to be.
+It took many years to acquire the fiber network between the observatory and SLAC, and a few years to get the performance to where it needs to be.
 
-The images contain $\approx$ 8GB of information which compresses to  around $\approx 4GB$ on the wire/disk.
+The images contain $\approx$\,8\,GB of information, which compresses to $\approx$\,4\,GB on the wire/disk.
 In normal operation more than 95\% of CCD images arrive at the USDF within two to three seconds, without landing on an intermediate disk.
 The data are ingested into the Butler and made available to Prompt Processing, which produces nightly  products and alerts, where a template is available,  within minutes.
 On the first night of alert production, Rubin issued about 800K alerts.
@@ -59,7 +59,7 @@ A service that can be rebuilt from configuration is easier to patch, move and re
 
 This is a novel approach for an observatory and some astronomers found it odd that we allow no user-installed  software.
 Of course this is also due to being a survey telescope with homogeneous processing of data.
-This has allowed us rebuild the system from scratch when we have needed to (due to blown switches and CPUs).
+This has allowed us to rebuild the system from scratch when we have needed to (due to blown switches and CPUs).
 
 \section{A long-lived system}
 \label{sec:architecture}
@@ -73,13 +73,13 @@ On the other hand we nimbly switched from the old Data Distribution System (DDS)
 
 Change is needed but needs to be communicated when interfaces are involved.
 In DM we run a weekly Change Control Board (CCB) to assess and approve changes in a timely manner.
-Lower level details are delegated and can be changed with local agreement using the
+Lower-level details are delegated and can be changed with local agreement using
 the Request For Comment (RFC) process\footnote{https://developer.lsst.io/communications/rfc.html}.
 
-Early systems engineering is important, often under valued and under estimated.
+Early systems engineering is important, often undervalued and underestimated.
 Rubin verification went perhaps a little too far in terms of requiring formal tests for every low-level requirement where inspection, or verification of the parent higher-level requirement, would have sufficed.
 Many requirements were not written in a verifiable manner and some were superseded over the years.
-In the end some larger tests had to be used to infer coverage of lower level included requirements.
+In the end some larger tests had to be used to infer coverage of lower-level included requirements.
 There was simply not enough effort to define and run all the necessary acceptance tests at the
 level originally intended.
 
@@ -101,7 +101,7 @@ Gaia took a similar approach, insulating its algorithms from the Main Database t
 \label{sec:standards}
 
 Standards reduce the learning curve for users and avoid creating another private ecosystem.
-Rubin takes an IVOA-first approach for science data access: TAP for tabular queries, HiPS for image visualisation, SODA and SIA for image access and DataLink to connect query results to related services.
+Rubin takes an IVOA-first approach for science data access: TAP for tabular queries, HiPS for image visualization, SODA and SIA for image access and DataLink to connect query results to related services.
 Many existing tools already support these protocols.
 
 Where possible Rubin uses mature implementations.
@@ -114,15 +114,15 @@ Since 2016 essentially all growth has been in Python (Figure~\ref{fig:loc}).
 \begin{figure}
 \plotone[width=0.6\textwidth]{figures/pipelines_loc}
 \caption{Lines of code and comments in the Rubin Science Pipelines, Python and C++, 2013--2026.
-Figure courtesy of T.~Jenness. This is an update of the plot in \citep{2018SPIE10707E..09J}}
+Figure courtesy of T.~Jenness. This is an update of the plot in \citet{2018SPIE10707E..09J}.}
 \label{fig:loc}
 \end{figure}
 
-Data licensing usually gets left very late or is done as an after thought.
+Data licensing usually gets left very late or is done as an afterthought.
 Working on open source software is not a given for all institutions; it's good to have it written into the contracts.
 We did this for Rubin but were too explicit naming a specific license (GNU General Public License) in the contracts.
 This made it close to impossible to change during construction when we thought BSD License may be better.
-Finally we have extracted some packages, like Butler, and put them under dual license to allow others use them more easily.
+Finally we have extracted some packages, like Butler, and put them under dual license to allow others to use them more easily.
 
 
 \subsection{Start performance and integration testing early}
@@ -189,7 +189,7 @@ Decisions should generally be pushed down to the lowest possible level to speed 
 The RFC process makes technical proposals visible while leaving decisions with the people closest to the work.
 Team leads and managers need to delegate tasks, and once they do,  they need to let go: understanding that the task may
 not be done exactly as they would do it, but they must trust that  it will be done.
-This is perhaps the hardest management lesson: a risk-adverse organization does not trust that work will be done correctly and so it concentrates decisions at the top and paralyzes autonomy at lower levels.
+This is perhaps the hardest management lesson: a risk-averse organization does not trust that work will be done correctly and so it concentrates decisions at the top and paralyzes autonomy at lower levels.
 
 Real leadership is required for success \citep{bossfactor}, not just pure management, and good scientific/technical leaders are hard to find.
 It is good to experiment giving people a chance to lead/manage with a safety net to back out later.
@@ -212,7 +212,7 @@ so both the phase and organization changed at the same time.
 
 Durable organizations exist for good reasons.
 Funding agencies require a certain level of governance, compliance, financial control and other things.
-Long lived organizations, in theory, retain capability across staff turnover and provide a legal and administrative home for the facility.
+Long-lived organizations, in theory, retain capability across staff turnover and provide a legal and administrative home for the facility.
 They feel more reliable to the agencies;  they are a known quantity.
 The cost is organizational inertia.
 Organizations spend substantial effort maintaining their structures, and the mechanisms that provide reliability also resist change
@@ -231,7 +231,7 @@ It is not obvious that this works for a science-driven organization that manages
 This organizational style has its own issues and limitations since inception  \citep{Davis1978}, but with good leadership, engineering services does seem to have made this work.
 
 Most DM teams were not broken up in the transition but reporting lines did change.
-Changing someone's reporting line changes a persons connection to the organization;
+Changing someone's reporting line changes a person's connection to the organization;
 to most people  a known competent supervisor is very important \citep{bossfactor},
 making this a dangerous gambit.
 
@@ -250,7 +250,7 @@ Recruitments can be slow and risky (in this case it was a year before we had a r
 In an organization which requires approvals from almost the top level for anything the main power that people have remaining is to say no.
 
 This example highlights the cost of failing at staff retention; the impact of losing a high performing engineer is ultimately greater than the increase in compensation that would have retained them.
-The potential catastrophic risk, i.e., inability to observe,  of the DevOps team running at 50\% was masked by the team's foundation, competence and heroic efforts - and ironically, management attention was not prioritized since the team was able to avert the risk materializing.
+The potential catastrophic risk, i.e., inability to observe,  of the DevOps team running at 50\% was masked by the team's foundation, competence and heroic efforts -- and ironically, management attention was not prioritized since the team was able to avert the risk materializing.
 This risk materialized one night but was masked by bad weather keeping us off sky and was fixed by the following night.
 Hiring controls and compliance are needed, but adequate staffing is part of system reliability.
 
@@ -264,23 +264,20 @@ Shared services should have a service level agreement, even an informal one: wha
 At ADASS I suggested we may like to track some metrics in all of our organizations, there were many nods as I spoke of delays
 and how high in the organization small approvals need to go. For example, hiring is a critical function, and HR metrics should be reported as the facility metrics are.
 Some simple metrics might be:
-\begin{itemize}
-\item elapsed time from approval to a new employee starting;
-\item elapsed time to place a routine procurement or contract;
-\item time and number of approvals for ordinary travel;
-\item time to replace a critical operational role after departure;
-\item time from an identified operational problem to an authorized fix;
-\item fraction of technical staff time spent on internal administrative procedures rather than mission work.
-\end{itemize}
-
-These would be hard to measure of course, some sort or regular questionnaire to ADASS would be required.
+elapsed time from approval to a new employee starting;
+elapsed time to place a routine procurement or contract;
+time and number of approvals for ordinary travel;
+time to replace a critical operational role after departure;
+time from an identified operational problem to an authorized fix; and
+fraction of technical staff time spent on internal administrative procedures rather than mission work.
+These would be hard to measure of course, some sort of regular questionnaire to ADASS would be required.
 
 
 
 \section{Lessons learned}
 \label{sec:lessons}
 
-We relearn lessons all the time - but here we go again, for the record.
+We relearn lessons all the time -- but here we go again, for the record.
 
 \subsection{Stage the work}
 
@@ -289,7 +286,7 @@ It seems obvious processing data comes long before serving it to the community.
 Gaia delayed the archive work  until close to launch.
 Rubin started most DM work breakdown elements at about the same time; some needed that time, others could have started later.
 So think if all things are needed at the same time or not and if effort could be concentrated on earlier tasks.
-Think also that if the entire team for all parts is engaged the inevitable standing army problem is bigger when delay
+Think also that if the entire team for all parts is engaged the standing army problem is bigger when delay
 inevitably hits.
 
 \subsection{Write interfaces and conventions down}
@@ -299,10 +296,10 @@ Gaia invested early in conventions \citep{LL:BAS-003} and a common data dictiona
 Rubin DM has the schema definition but it is mainly for community deliverables whereas Gaia Main Database definition
 defined all data objects used internally and as deliverables.
 Rubin does not have a single convention document like Gaia's but has various documents on specific conventions.
-In both cases we have seen short lived misunderstandings due to instrument and astronomy teams adopting different coordinate systems for the same focal plane.
+In both cases we have seen short-lived misunderstandings due to instrument and astronomy teams adopting different coordinate systems for the same focal plane.
 
 Both Rubin\footnote{\url{developer.lsst.io}} and Gaia \citep{LL:WOM-011} started extensive developer guides early on and maintained them.
-In particular, Rubin coding styles guides made it easier for any developer to understand the code and eased cross team collaboration.
+In particular, Rubin coding style guides made it easier for any developer to understand the code and eased cross-team collaboration.
 
 Requirements, traceability and test reports are useful at the right level (\S\ref{sec:architecture}).
 Requirements management should not become an end in itself, and not every requirement needs its own test
@@ -325,7 +322,7 @@ Such resolution requires a technically competent manager to arbitrate and actual
 We all struggle with recognition for technical work or simply keeping everything running.
 Science-driven projects are often motivated by recognition through publication, which does not fit well with service.
 Acknowledgment often goes a long way, promotions go further but are not always available of course.
-Allowing a certain amount of time for experimentation and having an open decision making process,
+Allowing a certain amount of time for experimentation and having an open decision-making process,
 that can actually effect change
 really helps keep team members engaged.
 
@@ -344,6 +341,6 @@ We lack good published metrics to know if our changes are effective.
 
 Rubin moves a large camera across the sky, reads 3.2 billion pixels, gets the data from Chile to the US in seconds, runs the science pipelines, distributes alerts and serves science-ready data to a global community.
 This works because many teams spent years perfecting each part,  automating deployment, testing at scale and learning from failures.
-It is awesome - the images are spectacular, it is probably the greatest discovery engine in astronomy.
+It is awesome -- the images are spectacular, it is probably the greatest discovery engine in astronomy.
 As we join a new organization, challenges appear, but also hope, as a major management change occurred in November 2026 that gives reason for optimism.
 
