@@ -11,17 +11,17 @@ Thankfully we have  great teams with a common goal to keep Rubin awesome.
 
 During construction,  Rubin was a project with a strong technical identity and relatively autonomous teams.
 The transition to operations moved it into a larger long-standing organization, NSF NOIRLab, with different priorities, processes and values.
-This is a normal transition for a facility, but it grates somewhat with DM particularly.
+This is a normal transition for a facility, but it creates friction, particularly for DM.
 
 This paper describes how we built and operate a petascale astronomical data system (\S\S\ref{sec:data-system}--\ref{sec:software}), and the organizational changes we underwent as we entered operations (\S\S\ref{sec:teams}--\ref{sec:metrics}).
 
 \section{Rubin data management system}
 \label{sec:data-system}
 
-Rubin uses an 8.4~m mirror to give a 9.6~deg$^2$ field of view  and uses the largest digital camera built t date to capture the details of the sky.
+Rubin uses an 8.4~m mirror to give a 9.6~deg$^2$ field of view  and uses the largest digital camera built to date to capture the details of the sky.
 Most users will never interact with either the telescope or the camera; they will use calibrated images, catalogs, alerts, APIs, notebooks and query services.
 DM is responsible for data from the back of the camera all the way to delivering science-ready products to the data rights holders.
-That includes the 103,000\,km of fibre providing a reliable connection between the camera to SLAC!
+That includes the 103,000\,km of fibre providing a reliable connection between the camera and SLAC!
 
 \subsection{From the camera to Prompt Processing}
 \label{sec:prompt}
@@ -66,9 +66,9 @@ This has allowed us rebuild the system from scratch when we have needed to (due 
  Astronomy projects, though short in astronomical terms, tend to be long in human terms.
 Ten to fifteen years of study before a decade or more of construction is normal.
 Over such timescales hardware, software ecosystems, institutions and people all change, and the architecture has to allow for it.
-
-Room to experiment is important and prototypes are great - alas occasionally they stay around too long.
-We have at least one summit system which has not been well engineered.
+Room to experiment is important and prototypes are great -- alas occasionally they stay around too long.
+We have at least one prototype, which has not been well engineered, but is now in production on summit.
+This uses many resources (CPU) and may be difficult to maintain in the long term.
 On the other hand we nimbly switched from the old Data Distribution System (DDS) to a custom library using Kafka as the control message bus \citep{2024SPIE13101E..18R} just before bringing the LSST Camera online.
 
 Change is needed but needs to be communicated when interfaces are involved.
@@ -135,7 +135,7 @@ With current hardware price trends, and given the maturity of the Rubin code bas
 Good components do not guarantee a good system, so system tests, operational rehearsals and end-to-end exercises were planned as part of construction.
 
 Rubin has used dedicated scale tests, precursor data, cloud experiments and repeated production exercises to flush out issues.
-The Data Previews are the latest of these; e.g. DP1 \citep{2026AJ....171..360V} was effectively an operations rehearsal for DM on making a Data Release.
+The Data Previews are the latest of these; e.g. DP1 and DP2  \citep{2026AJ....171..360V,RTN-115} were effectively operations rehearsal for DM on making a Data Release.
 
 Qserv \citep{2025ASPC..538..114M}, our shared-nothing parallel catalog database, provides spatial partitioning, overlap for near-neighbor queries, shared scans and replication.
 It has been tested with mixed workloads, not just single benchmark queries.
@@ -164,7 +164,7 @@ Phalanx was cloud first from the outset, so deploying on Google is as easy as at
 
 Most technical documentation is kept under version control alongside the software.
 Templates make it easy and fast to start a technote or documentation site, and published material is searchable\footnote{see \url{lsst.io}}.
-This keeps engineering knowledge out of private notes and wikis where it is hard to find later.
+This keeps knowledge out of private notes and wikis where it is hard to find later.
 
 \subsection{Operations}
 \label{sec:operations}
@@ -228,7 +228,7 @@ NOIRLab chose to be a matrix organization. In the current implementation this se
 While matrix management facilitates resource sharing and distribution of responsibility across the organization, it also introduces ambiguity in accountability and decision-making authority.
 When responsibilities or authority aren't clearly defined, decisions have to be made by management at higher levels, reducing people's autonomy, and increasing organizational overhead.
 It is not obvious that this works for a science-driven organization that manages multiple facilities, each of which is quite different.
-This organizational style has its own issues and limitations since inception  \citep{Davis1978}, but with good leadership engineering services does seem to have made this work.
+This organizational style has its own issues and limitations since inception  \citep{Davis1978}, but with good leadership, engineering services does seem to have made this work.
 
 Most DM teams were not broken up in the transition but reporting lines did change.
 Changing someone's reporting line changes a persons connection to the organization;
@@ -237,7 +237,7 @@ making this a dangerous gambit.
 
 The efficiency and operational benefits of the new structure remain unclear.
 It is certainly not cheaper as the new structure introduced additional layers of management and administration.
-A risk in non-lean organizations is that bureucratic growth becomes self-fulfilling \citep{Parkinson1955}.
+A risk in non-lean organizations is that bureaucratic growth becomes self-fulfilling \citep{Parkinson1955}.
 
 \subsection{Chile DevOps}
 \label{sec:devops}
@@ -246,8 +246,7 @@ The Chile DevOps team (\S\ref{sec:summit}) is small and operationally critical.
 It runs the summit and base compute and storage, much of the Tucson infrastructure, networking and the deployment layer used by DM and summit software. The team is also responsible for the secure transport of pixels from the summit to the USDF and ensuring they are securely stored at the summit.
 During the transition roughly half the team left; the rest were able to keep the system running so far (about a year) due to the
 solid foundation.
-
-Recruitment for their replacements was slow.
+Recruitments can be slow and risky (in this case it was a year before we had a replacement in post).
 In an organization which requires approvals from almost the top level for anything the main power that people have remaining is to say no.
 
 This example highlights the cost of failing at staff retention; the impact of losing a high performing engineer is ultimately greater than the increase in compensation that would have retained them.
